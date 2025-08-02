@@ -39,17 +39,17 @@ export default function HireMe() {
         className="w-full md:w-3/4 lg:w-1/2 ml-auto text-right space-y-4"
       >
         <p className="text-lg md:text-xl text-gray-700">
-          I'm always looking for the next challenge — whether it&apos;s building scalable web platforms,
+          I&apos;m always looking for the next challenge — whether it&apos;s building scalable web platforms,
           crafting sleek interfaces, or solving control system problems with MATLAB and logic.
         </p>
 
         <p className="text-md md:text-lg text-gray-600">
-          If you're hiring for a role in software engineering, instrumentation, or R&D — and value
+          If you&apos;re hiring for a role in software engineering, instrumentation, or R&D — and value
           clean code, critical thinking, and someone who knows how to lead as well as listen — let&apos;s talk.
         </p>
 
         <p className="text-md md:text-lg text-gray-600">
-          I'm open to full-time roles, freelance projects, and collaborative ventures that push the edge.
+          Iapos;m open to full-time roles, freelance projects, and collaborative ventures that push the edge.
         </p>
 
         {/* Sleek “Let&apos;s Connect” Link */}
