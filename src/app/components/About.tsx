@@ -8,7 +8,7 @@ export default function AboutMe() {
 
   return (
     <div className="relative w-full min-h-screen overflow-hidden bg-white text-gray-900 font-mono">
-      <div className="relative z-10 flex flex-col justify-center min-h-screen px-4 sm:px-8 md:px-24  pb-12">
+      <div className="relative z-10 flex flex-col justify-center min-h-screen px-4 sm:px-8 md:px-24 pt-12 pb-12">
         {/* Heading with underline */}
         <div className="flex items-center justify-end w-full mb-6 text-center md:text-right">
           <motion.div
@@ -33,7 +33,7 @@ export default function AboutMe() {
           initial={{ opacity: 0, x: 50 }}
           animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
           transition={{ duration: 0.8 }}
-          className={`bg-gray-100 rounded-lg max-w-full sm:max-w-3xl md:max-w-4xl
+          className={`bg-gray-100 py-12 rounded-lg max-w-full sm:max-w-3xl md:max-w-4xl
             text-left text-sm md:text-lg leading-relaxed whitespace-pre-wrap shadow-md border border-gray-300
             px-4 sm:px-6 md:px-12
             ${isInView ? "pointer-events-auto" : "pointer-events-none"}`}

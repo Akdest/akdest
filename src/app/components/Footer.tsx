@@ -7,13 +7,13 @@ export default function Footer() {
         </p>
         <div className="flex items-center space-x-4 text-xs">
           <a
-            href="mailto:ayush@example.com"
+            href="mailto:ayushkr0104@gmail.com"
             className="hover:text-white transition duration-200"
           >
             Contact
           </a>
           <a
-            href="https://github.com/ayushverma-dev"
+            href="https://github.com/Akdest"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-white transition duration-200"
@@ -21,7 +21,7 @@ export default function Footer() {
             GitHub
           </a>
           <a
-            href="https://linkedin.com/in/ayushverma"
+            href="https://linkedin.com/in/ayushkumar-akdest"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-white transition duration-200"

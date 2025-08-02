@@ -9,30 +9,32 @@ const projects = [
     title: "The Black Company eCommerce",
     description:
       "Full-stack dark-themed eCommerce platform with animated UI and seamless payment integration.",
-    img: "/bg.jpg",
-    deployment: "https://blackcompany.example.com",
+    img: "/tbc.png",
+    deployment: "https://the-black-company.vercel.app/",
   },
   {
     title: "E2ACon 2025 Conference Website",
     description:
       "Interactive conference site with live countdown, paper submissions, and Springer-indexed proceedings.",
-    img: "/projects/e2acon.jpg",
-    deployment: "https://e2acon.example.com",
+    img: "e2a.png",
+    deployment: "https://e2acon25.vercel.app/welcome",
   },
   {
-    title: "Personal Portfolio",
+    title: "IEEE NITJ Student Chapter",
     description:
-      "Dual-mode portfolio blending web dev finesse with instrumentation engineering insights.",
-    img: "/projects/portfolio.jpg",
-    deployment: "https://ayushportfolio.example.com",
+      "The official site of NITJ IEEE Student Chapter",
+    img: "/ieee.png",
+    deployment: "https://ieeenitj.vercel.app/",
   },
   {
-    title: "Autonomous Navigation System",
+    title: "Galactic Pet Adoption app",
     description:
-      "LiDAR-based autonomous agricultural vehicle navigation using MPC and path tracking.",
-    img: "/projects/navigation.jpg",
-    deployment: "https://navigation.example.com",
+      "Web app for adopting pets with a modern UI, animations, and responsive design.",
+    img: "/pet.png",
+    deployment: "https://pet-app-azure.vercel.app/",
   },
+
+  
 ];
 
 export default function Projects() {
@@ -90,8 +92,8 @@ y2={`${(50 + 50 * Math.sin(rad)).toFixed(4)}%`}
             transition={{ duration: 0.8 }}
             className="text-[2.5rem] md:text-8xl font-extrabold tracking-wide text-gray-900 leading-tight"
           >
-            Spidy Works?&#128064;
-          </motion.h2>
+            Spidy Works?
+                      </motion.h2>
         </div>
 
         {/* Project List */}

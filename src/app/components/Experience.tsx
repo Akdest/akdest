@@ -22,23 +22,12 @@ db.experiences.find({
 /*
 [
   {
-    role: "Frontend Intern",
-    company: "Cybernaut Labs",
-    period: "Jan 2025 - Mar 2025",
-    description: "Built reusable UI components, optimized performance with Next.js and TailwindCSS, added fluid animations."
+    role: "Web Developer Intern",
+    company: "Stirring Minds",
+    period: "June 2024 - Aug-2024",
+    description: "Developed full-stack web applications with Next.js, Node.js, and MongoDB, focusing on performance and user experience."
   },
-  {
-    role: "Web Developer",
-    company: "The Black Company",
-    period: "Dec 2024 - Present",
-    description: "Led full-stack development of an eCommerce platform featuring authentication and sleek dark-glassmorphism UI."
-  },
-  {
-    role: "Team Lead - E2ACon Website",
-    company: "NIT Jalandhar",
-    period: "Sep 2024 - Dec 2024",
-    description: "Architected multi-section website for Springer-indexed international conference with dynamic hero and countdown."
-  }
+  
 ]
 */
 `;

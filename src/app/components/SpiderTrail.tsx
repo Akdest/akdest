@@ -7,6 +7,7 @@ export default function SpiderTrail() {
   const spiderRef = useRef<HTMLDivElement | null>(null);
   const trailRef = useRef<{ x: number; y: number }[]>([]);
   const lastScrollYRef = useRef<number>(0);
+  const legPathsRef = useRef<SVGPathElement[]>([]);
 
   useEffect(() => {
     lastScrollYRef.current = window.scrollY;
@@ -19,7 +20,7 @@ export default function SpiderTrail() {
     if (!ctx) return;
 
     const spiderSize = 250;
-    const spiderCenterOffset = spiderSize / 2; // 125
+    const spiderCenterOffset = spiderSize / 2;
 
     const updateCanvasSize = () => {
       canvas.width = window.innerWidth;
@@ -28,37 +29,34 @@ export default function SpiderTrail() {
 
     updateCanvasSize();
 
+    let t = 0;
+
     const animate = () => {
       const scrollY = window.scrollY;
       const scrollHeight = document.documentElement.scrollHeight;
       const viewportHeight = window.innerHeight;
       const maxScroll = scrollHeight - viewportHeight;
 
-      // Calculate spider vertical position matching scrollbar thumb
       const spiderTop = maxScroll === 0 ? 0 : (scrollY / maxScroll) * viewportHeight;
 
-      const newX = 100; // fixed horizontal position
+      const newX = 100;
       const newY = spiderTop;
 
-      // Position spider div exactly
       spider.style.left = `${newX}px`;
       spider.style.top = `${newY}px`;
 
       const lastScrollY = lastScrollYRef.current;
 
       if (scrollY > lastScrollY) {
-        // Scroll down → add to trail
         const newPoint = { x: newX + spiderCenterOffset, y: newY + spiderCenterOffset };
         trailRef.current.push(newPoint);
         if (trailRef.current.length > 1000) trailRef.current.shift();
       } else if (scrollY < lastScrollY) {
-        // Scroll up → remove from trail
         trailRef.current.pop();
       }
 
       lastScrollYRef.current = scrollY;
 
-      // Draw trail on canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const trail = trailRef.current;
       if (trail.length > 1) {
@@ -72,6 +70,34 @@ export default function SpiderTrail() {
         ctx.stroke();
       }
 
+      // Animate spider legs using sine waves
+      legPathsRef.current.forEach((path, index) => {
+        const offset = index * 0.5;
+        const wave = Math.sin(t + offset) * 5;
+
+        switch (index) {
+          case 0:
+            path.setAttribute("d", `M40 40 C20 ${30 + wave}, 20 10, 30 0`);
+            break;
+          case 1:
+            path.setAttribute("d", `M38 50 C15 ${50 + wave}, 15 30, 25 20`);
+            break;
+          case 2:
+            path.setAttribute("d", `M40 60 C20 ${70 + wave}, 20 90, 30 100`);
+            break;
+          case 3:
+            path.setAttribute("d", `M60 40 C80 ${30 - wave}, 80 10, 70 0`);
+            break;
+          case 4:
+            path.setAttribute("d", `M62 50 C85 ${50 - wave}, 85 30, 75 20`);
+            break;
+          case 5:
+            path.setAttribute("d", `M60 60 C80 ${70 - wave}, 80 90, 70 100`);
+            break;
+        }
+      });
+
+      t += 0.1;
       requestAnimationFrame(animate);
     };
 
@@ -105,12 +131,26 @@ export default function SpiderTrail() {
           <circle cx="44" cy="45" r="3" fill="white" />
           <circle cx="56" cy="45" r="3" fill="white" />
           <path d="M44 55 Q50 60, 56 55" stroke="white" strokeWidth="2" fill="none" />
-          <path d="M40 40 C20 30, 20 10, 30 0" stroke="black" strokeWidth="3" fill="none" />
-          <path d="M38 50 C15 50, 15 30, 25 20" stroke="black" strokeWidth="3" fill="none" />
-          <path d="M40 60 C20 70, 20 90, 30 100" stroke="black" strokeWidth="3" fill="none" />
-          <path d="M60 40 C80 30, 80 10, 70 0" stroke="black" strokeWidth="3" fill="none" />
-          <path d="M62 50 C85 50, 85 30, 75 20" stroke="black" strokeWidth="3" fill="none" />
-          <path d="M60 60 C80 70, 80 90, 70 100" stroke="black" strokeWidth="3" fill="none" />
+
+          {[
+            "M40 40 C20 30, 20 10, 30 0",
+            "M38 50 C15 50, 15 30, 25 20",
+            "M40 60 C20 70, 20 90, 30 100",
+            "M60 40 C80 30, 80 10, 70 0",
+            "M62 50 C85 50, 85 30, 75 20",
+            "M60 60 C80 70, 80 90, 70 100",
+          ].map((d, i) => (
+            <path
+              key={i}
+              ref={(el) => {
+                if (el) legPathsRef.current[i] = el;
+              }}
+              d={d}
+              stroke="black"
+              strokeWidth="3"
+              fill="none"
+            />
+          ))}
         </svg>
       </div>
     </>

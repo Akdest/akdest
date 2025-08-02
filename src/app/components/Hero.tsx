@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -22,11 +23,28 @@ const childVariants = {
 };
 
 export default function Hero() {
-  // JS helper to download file programmatically
+  const [greeting, setGreeting] = useState("G'day");
+
+  useEffect(() => {
+    const getISTGreeting = () => {
+      const now = new Date();
+      const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+      const istTime = new Date(utc + 5.5 * 3600000);
+      const hours = istTime.getHours();
+
+      if (hours >= 6 && hours < 12) return "G'day";
+      if (hours >= 12 && hours < 17) return "G'aft";
+      if (hours >= 17 && hours < 21) return "G'eve";
+      return "G'night";
+    };
+
+    setGreeting(getISTGreeting());
+  }, []);
+
   const downloadFile = (url: string) => {
     const link = document.createElement("a");
     link.href = url;
-    link.download = ""; // Let browser infer filename
+    link.download = "";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -43,26 +61,25 @@ export default function Hero() {
       >
         <motion.p
           variants={childVariants}
-          className="text-sm md:text-base lg:text-[5rem] text-neutral-600 mb-2"
+          className="text-[2.5rem] md:text-[2.5rem] lg:text-[5rem] text-neutral-600 mb-2"
         >
-          G&apos;day, buddy!!
+          {greeting}, buddy!!
         </motion.p>
 
         <motion.h1
           variants={childVariants}
-          className="text-5xl md:text-7xl lg:text-[9rem] text-slate-950 font-extrabold tracking-tight"
+          className="text-[4rem] md:text-[7rem] lg:text-[9rem] text-slate-950 font-extrabold tracking-tight"
         >
           I&apos;m Ayush
         </motion.h1>
 
         <motion.p
           variants={childVariants}
-          className="mt-4 text-base md:text-lg lg:text-[2rem] text-neutral-500 max-w-xl"
+          className="mt-4 text-[1.5rem] md:text-[2rem] lg:text-[2rem] text-neutral-500 max-w-xl"
         >
           A passionate developer crafting sleek and modern web experiences.
         </motion.p>
 
-        {/* Download CV Button - using Link only with JS download */}
         <motion.div variants={childVariants} className="mt-8">
           <Link
             href="#"
@@ -70,7 +87,7 @@ export default function Hero() {
               e.preventDefault();
               downloadFile("/Ayush_CV.pdf");
             }}
-            className="inline-flex items-center gap-2 rounded-md text-slate-950 px-6 py-3 font-semibold text-lg transition hover:bg-gray-200 cursor-pointer select-none"
+            className="inline-flex items-center gap-2 text-slate-950 px-6 py-3 font-semibold text-lg transition hover:bg-gray-200 cursor-pointer select-none"
             aria-label="Download CV"
           >
             Download CV
@@ -87,7 +104,7 @@ export default function Hero() {
         className="z-0 pointer-events-none select-none object-cover"
       />
 
-      {/* Akdest in Hex - Bottom Right */}
+      {/* Akdest in Hex */}
       <motion.div
         initial={{ opacity: 0, x: 50, y: 20 }}
         animate={{ opacity: 1, x: 0, y: 0 }}
@@ -97,12 +114,18 @@ export default function Hero() {
         0x416B64657374
       </motion.div>
 
-      {/* Animated Scroll Down Arrow */}
+      {/* Scroll Down Arrow */}
       <motion.div
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 cursor-pointer"
+        className="absolute bottom-10 left-1/2 transform text-black -translate-x-1/2 z-20 cursor-pointer"
         animate={{
-          y: [0, 15, 0], // Up and down motion
-          opacity: [1, 0.6, 1],
+          y: [0, 15, 0], // bounce up and down
+          opacity: [1, 0.6, 1], // fade
+          scale: [1, 1.2, 1], // pulse size
+          filter: [
+            "drop-shadow(0 0 0 rgba(255,255,255,0))", // no glow
+            "drop-shadow(0 0 8px rgba(255,255,255,0.6))", // glow
+            "drop-shadow(0 0 0 rgba(255,255,255,0))", // no glow
+          ],
         }}
         transition={{
           duration: 2,
@@ -111,7 +134,7 @@ export default function Hero() {
         }}
         aria-label="Scroll down indicator"
       >
-        <ArrowUpRight size={40} strokeWidth={2} color="white" />
+        <ArrowDown size={40} strokeWidth={2} color="black" />
       </motion.div>
     </div>
   );
